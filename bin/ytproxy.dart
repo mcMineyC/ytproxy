@@ -28,6 +28,6 @@ void main(List<String> arguments) async {
       else return false;
     }))
     .addHandler(app);
-  var server = await io.serve(handler, 'localhost', 8080);
+  var server = await io.serve(handler, '0.0.0.0', 8080);
   print("Server running at http://${server.address.host}:${server.port}");
 }

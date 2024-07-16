@@ -19,6 +19,13 @@ void main(List<String> arguments) async {
     // print('url: ${streamInfo.url.toString()}');
     return Response.ok(streamInfo.url.toString());
   });
+  app.get('/url/ios/<id>', (Request request, String id) async {
+    // print('url id: $id');
+    var media = await yt.videos.streamsClient.getManifest(id);
+    var streamInfo = media.audioOnly.where((e) => e.audioCodec != 'opus' && e.container != StreamContainer.webM).withHighestBitrate();
+    // print('url: ${streamInfo.url.toString()}');
+    return Response.ok(streamInfo.url.toString());
+  });
   var handler = const Pipeline()
     .addMiddleware(logRequests())
     .addMiddleware(corsHeaders(originChecker: (origin) {
